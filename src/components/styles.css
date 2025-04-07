@@ -1,101 +1,129 @@
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f4f4;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
     margin: 0;
-    padding: 20px;
-}
-
-.planner{
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.event-form{
+    padding: 2rem;
+    color: #333;
+  }
+  
+  h1, h2 {
+    text-align: center;
+    color: #222;
+  }
+  
+  .planner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .event-form {
     display: flex;
     flex-direction: column;
-}
-
-.event-form input, .event-form button{
-    margin: 5px 0;
-    padding: 10px;
-}
-
-.event-list{
-    margin-top: 20px;
-}
-
-event-item{
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    background: #fff;
-    border-radius: 5px;
-}
-
-.event-item.Completado{
-    background: #d4edda;
-}
-
-.event-item.Proximamente{
-    background: #fff3cd;
-}
-
-button{
-    padding: 8px 12px;
-    border: none;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  
+  .event-form input,
+  .event-form button {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  
+  .event-form button {
+    background-color: #007bff;
+    color: white;
     cursor: pointer;
-    background: #007bff;
+    transition: background 0.3s;
+  }
+  
+  .event-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .event-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .event-item {
+    background: white;
+    border: 1px solid #ddd;
+    border-left: 6px solid #999;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .event-item.proximamente {
+    border-left-color: #f39c12;
+  }
+  
+  .event-item.en\ curso {
+    border-left-color: #3498db;
+  }
+  
+  .event-item.completado {
+    border-left-color: #2ecc71;
+    opacity: 0.8;
+  }
+  
+  .complete-button {
+    margin-top: 0.5rem;
+    background-color: #28a745;
     color: white;
+    padding: 0.5rem 0.75rem;
+    border: none;
     border-radius: 5px;
-}
-
-button:hover{
-    background: #0056b3;
-}
-
-.event.Proximamente {
-    background-color: #ffeaa7;
+    cursor: pointer;
   }
   
-  .event.En-curso {
-    background-color: #74b9ff;
-    color: white;
-  }
-  
-  .event.Finalizado {
-    background-color: #dfe6e9;
-  }
-  
-  .event.Completado {
-    background-color: #55efc4;
-    color: white;
+  .complete-button:hover {
+    background-color: #218838;
   }
   
   /* Animaciones */
-  .fade-in {
-    animation: fadeIn 1s ease-in-out;
+  .event-item.highlight {
+    animation: pulse 1.5s infinite;
+  }
+  
+  .event-item.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
   }
   
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
-  .highlight {
-    animation: highlightEffect 1s ease-in-out;
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+    }
   }
   
-  @keyframes highlightEffect {
-    0% { background-color: yellow; }
-    100% { background-color: inherit; }
-  }
+  /* Responsivo */
+  @media (max-width: 600px) {
+    .planner {
+      padding: 1rem;
+    }
   
-  /* Drag & Drop efecto */
-  .dragging {
-    opacity: 0.5;
-    transform: scale(1.05);
+    .event-form input,
+    .event-form button {
+      font-size: 0.95rem;
+    }
   }
