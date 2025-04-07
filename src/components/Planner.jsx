@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import EventForm from "./EventForm";
 import EventList from "./EventList";
-import "./styles.css";
+import "../styles.css";
 
-const App = () => {
+const Planner = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
