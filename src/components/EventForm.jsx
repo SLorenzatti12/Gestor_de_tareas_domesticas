@@ -17,7 +17,7 @@ const EventForm = ({addEvent}) => {
             description,
             date,
             duration,
-            status: "Proximamente"
+            status: "Próximamente"
         };
 
         addEvent(newEvent);

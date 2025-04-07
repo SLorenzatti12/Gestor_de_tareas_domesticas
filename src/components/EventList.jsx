@@ -1,8 +1,8 @@
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Draggable } from "react-beautiful-dnd";
 
-const EventList = ({ events, markAsCompleted, deleteEvent }) => {
+const EventList = ({ events, markAsCompleted, deleteEvent, placeholder }) => {
   return (
     <div className="event-list">
       <h2>Eventos Programados</h2>
@@ -10,12 +10,18 @@ const EventList = ({ events, markAsCompleted, deleteEvent }) => {
         <p>No hay eventos programados.</p>
       ) : (
         <ul>
-          <AnimatePresence>
-            {events.map((event, index) => (
-              <Draggable key={event.id} draggableId={event.id} index={index}>
+          {events.map((event, index) => {
+            const statusClass = event.status
+              .toLowerCase()
+              .replace(" ", "-")
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, ""); // elimina acentos
+
+            return (
+              <Draggable key={event.id} draggableId={event.id.toString()} index={index}>
                 {(provided) => (
                   <motion.li
-                    className={`event-item ${event.status}`}
+                    className={`event-item ${statusClass}`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.9 }}
@@ -38,8 +44,9 @@ const EventList = ({ events, markAsCompleted, deleteEvent }) => {
                   </motion.li>
                 )}
               </Draggable>
-            ))}
-          </AnimatePresence>
+            );
+          })}
+          {placeholder}
         </ul>
       )}
     </div>

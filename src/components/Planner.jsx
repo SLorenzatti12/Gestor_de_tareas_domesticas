@@ -1,9 +1,7 @@
-{/* Componente pricipal: Maneja el estado de los eventos*/}
-
 import React, { useState, useEffect } from "react";
 import EventForm from "./EventForm";
 import EventList from "./EventList";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { addMinutes, isBefore, isAfter, isWithinInterval } from "date-fns";
 import "./styles.css";
 
@@ -25,7 +23,7 @@ const Planner = () => {
 
   const markAsCompleted = (id) => {
     setEvents(events.map(event =>
-      event.id === id ? { ...event, status: "Completado" } : event
+      event.id === id ? { ...event, status: "completado" } : event
     ));
   };
 
@@ -37,20 +35,22 @@ const Planner = () => {
   const updateEventStatus = () => {
     const now = new Date();
     setEvents(events.map(event => {
-      if (event.status === "Completado") return event;
+      if (event.status === "completado") return event;
+
       const eventStart = new Date(event.date);
       const eventEnd = addMinutes(eventStart, parseInt(event.duration));
-      
+
       if (isBefore(now, eventStart)) {
-        return { ...event, status: "Próximamente", animation: "fade-in" };
+        return { ...event, status: "proximamente", animation: "fade-in" };
       }
       if (isWithinInterval(now, { start: eventStart, end: eventEnd })) {
         playNotification();
-        return { ...event, status: "En curso", animation: "highlight" };
+        return { ...event, status: "en-curso", animation: "highlight" };
       }
       if (isAfter(now, eventEnd)) {
-        return { ...event, status: "Finalizado" };
+        return { ...event, status: "completado" };
       }
+
       return event;
     }));
   };
