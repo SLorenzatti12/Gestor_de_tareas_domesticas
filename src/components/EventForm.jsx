@@ -8,18 +8,17 @@ const EventForm = ({ addEvent }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title || !date || !duration) return;
 
     const newEvent = {
       id: Date.now(),
       title,
       description,
       date,
-      duration,
-      status: "Proximamente",
+      duration: Number(duration),
     };
 
     addEvent(newEvent);
+
     setTitle("");
     setDescription("");
     setDate("");
@@ -27,30 +26,33 @@ const EventForm = ({ addEvent }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="event-form">
+    <form className="event-form" onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Título"
+        placeholder="Título del evento"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        required
       />
       <input
         type="text"
         placeholder="Descripción"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
+        required
       />
       <input
-        type="date"
+        type="datetime-local"
         value={date}
         onChange={(e) => setDate(e.target.value)}
+        required
       />
       <input
         type="number"
-        placeholder="Duración (min)"
-        min="1"
+        placeholder="Duración (minutos)"
         value={duration}
         onChange={(e) => setDuration(e.target.value)}
+        required
       />
       <button type="submit">Agregar Evento</button>
     </form>
