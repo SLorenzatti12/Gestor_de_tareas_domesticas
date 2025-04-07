@@ -79,7 +79,11 @@ const Planner = () => {
         <Droppable droppableId="events">
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              <EventList events={events} markAsCompleted={markAsCompleted} />
+              <EventList
+                events={events}
+                markAsCompleted={markAsCompleted}
+                deleteEvent={deleteEvent} // 👈 se pasa la función acá
+              />
               {provided.placeholder}
             </div>
           )}

@@ -3,7 +3,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const EventList = ({ events, markAsCompleted }) => {
+const EventList = ({ events, markAsCompleted, deleteEvent }) => {
   return (
     <div className="event-list">
       <h2>Eventos Programados</h2>
@@ -26,9 +26,13 @@ const EventList = ({ events, markAsCompleted }) => {
                 <p><strong>Fecha:</strong> {event.date}</p>
                 <p><strong>Duración:</strong> {event.duration} min</p>
                 <p><strong>Estado:</strong> {event.status}</p>
-                {event.status !== "Completado" && (
-                  <button onClick={() => markAsCompleted(event.id)}>Marcar como Completado</button>
-                )}
+                <div className="event-buttons">
+                    {event.status !== "Completado" && (
+                        <button onClick={() => markAsCompleted(event.id)}>Marcar como Completado</button>
+                    )}
+                    <button className="delete-btn" onClick={() => deleteEvent(event.id)}>Eliminar</button>
+                </div>
+                
               </motion.li>
             ))}
           </AnimatePresence>
