@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import EventForm from "./EventForm";
 import EventList from "./EventList";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { addMinutes, isBefore, isAfter, isWithinInterval } from "date-fns";
 import "./styles.css";
 
-const Planner = () => {
+const App = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    const storedEvents = JSON.parse(localStorage.getItem("events")) || [];
-    setEvents(storedEvents);
+    const storedEvents = localStorage.getItem("events");
+    if (storedEvents) {
+      setEvents(JSON.parse(storedEvents));
+    }
   }, []);
 
   useEffect(() => {
@@ -18,82 +18,30 @@ const Planner = () => {
   }, [events]);
 
   const addEvent = (newEvent) => {
-    setEvents([...events, newEvent]);
-  };
-
-  const markAsCompleted = (id) => {
-    setEvents(events.map(event =>
-      event.id === id ? { ...event, status: "completado" } : event
-    ));
+    setEvents((prevEvents) => [...prevEvents, newEvent]);
   };
 
   const deleteEvent = (id) => {
-    const updatedEvents = events.filter(event => event.id !== id);
-    setEvents(updatedEvents);
+    setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
   };
 
-  const updateEventStatus = () => {
-    const now = new Date();
-    setEvents(events.map(event => {
-      if (event.status === "completado") return event;
-
-      const eventStart = new Date(event.date);
-      const eventEnd = addMinutes(eventStart, parseInt(event.duration));
-
-      if (isBefore(now, eventStart)) {
-        return { ...event, status: "proximamente", animation: "fade-in" };
-      }
-      if (isWithinInterval(now, { start: eventStart, end: eventEnd })) {
-        playNotification();
-        return { ...event, status: "en-curso", animation: "highlight" };
-      }
-      if (isAfter(now, eventEnd)) {
-        return { ...event, status: "completado" };
-      }
-
-      return event;
-    }));
-  };
-
-  const playNotification = () => {
-    const audio = new Audio("/notification.mp3");
-    audio.play();
-    if (navigator.vibrate) {
-      navigator.vibrate(200);
-    }
-  };
-
-  useEffect(() => {
-    const interval = setInterval(updateEventStatus, 60000);
-    return () => clearInterval(interval);
-  }, [events]);
-
-  const onDragEnd = (result) => {
-    if (!result.destination) return;
-    const reorderedEvents = [...events];
-    const [movedEvent] = reorderedEvents.splice(result.source.index, 1);
-    reorderedEvents.splice(result.destination.index, 0, movedEvent);
-    setEvents(reorderedEvents);
+  const markAsCompleted = (id) => {
+    setEvents((prevEvents) =>
+      prevEvents.map((event) =>
+        event.id === id ? { ...event, status: "Completado" } : event
+      )
+    );
   };
 
   return (
     <div className="planner">
       <h1>Planificador de Rutinas</h1>
       <EventForm addEvent={addEvent} />
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="events">
-          {(provided) => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
-              <EventList
-                events={events}
-                markAsCompleted={markAsCompleted}
-                deleteEvent={deleteEvent}
-              />
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <EventList
+        events={events}
+        markAsCompleted={markAsCompleted}
+        deleteEvent={deleteEvent}
+      />
     </div>
   );
 };
