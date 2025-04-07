@@ -1,3 +1,5 @@
+{/* Componente pricipal: Maneja el estado de los eventos*/}
+
 import React, { useState, useEffect } from "react";
 import EventForm from "./EventForm";
 import EventList from "./EventList";

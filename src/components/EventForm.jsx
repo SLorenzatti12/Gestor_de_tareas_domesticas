@@ -1,3 +1,5 @@
+{/* Formulario para agregar eventos*/}
+
 import React, {useState} from "react";
 const EventForm = ({addEvent}) => {
     const [title, setTitle] =  useState("");
@@ -36,4 +38,4 @@ const EventForm = ({addEvent}) => {
     );
 };
 
-export default EventForm
+export default EventForm;
