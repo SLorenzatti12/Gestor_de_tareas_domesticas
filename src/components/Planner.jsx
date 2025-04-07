@@ -29,6 +29,11 @@ const Planner = () => {
     ));
   };
 
+  const deleteEvent = (id) => {
+    const updatedEvents = events.filter(event => event.id !== id);
+    setEvents(updatedEvents);
+  };
+
   const updateEventStatus = () => {
     const now = new Date();
     setEvents(events.map(event => {
@@ -82,7 +87,7 @@ const Planner = () => {
               <EventList
                 events={events}
                 markAsCompleted={markAsCompleted}
-                deleteEvent={deleteEvent} // 👈 se pasa la función acá
+                deleteEvent={deleteEvent}
               />
               {provided.placeholder}
             </div>
