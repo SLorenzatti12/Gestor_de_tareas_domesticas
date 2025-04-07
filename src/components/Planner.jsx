@@ -3,14 +3,33 @@ import EventForm from "./EventForm";
 import EventList from "./EventList";
 import "./styles.css";
 
+const getEventStatus = (startDate, durationMinutes) => {
+    const now = new Date();
+    const start = new Date(startDate);
+    const end = new Date(start.getTime() + durationMinutes * 60000);
+  
+    if (now < start) return "Proximamente";
+    if (now >= start && now <= end) return "En curso";
+    return "Completado";
+  };
+
 const Planner = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    const storedEvents = localStorage.getItem("events");
-    if (storedEvents) {
-      setEvents(JSON.parse(storedEvents));
-    }
+    const interval = setInterval(() => {
+      setEvents((prevEvents) =>
+        prevEvents.map((event) => {
+          const updatedStatus = getEventStatus(event.date, event.duration);
+          if (event.status !== updatedStatus) {
+            return { ...event, status: updatedStatus };
+          }
+          return event;
+        })
+      );
+    }, 60000); // Se actualiza cada 60 segundos
+  
+    return () => clearInterval(interval); // Limpiar el intervalo al desmontar
   }, []);
 
   useEffect(() => {
@@ -18,7 +37,9 @@ const Planner = () => {
   }, [events]);
 
   const addEvent = (newEvent) => {
-    setEvents((prevEvents) => [...prevEvents, newEvent]);
+    const status = getEventStatus(newEvent.date, newEvent.duration);
+    const eventWithStatus = { ...newEvent, status };
+    setEvents((prevEvents) => [...prevEvents, eventWithStatus]);
   };
 
   const deleteEvent = (id) => {
