@@ -29,10 +29,13 @@ const EventForm = ({addEvent}) => {
 
     return (
         <form onSubmit={handleSubmit} className="event-form">
-            <input type="text" placeholder="Título" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <label>
+                Titulo:
+                <input type="text" placeholder="Título" value={title} onChange={(e) => setTitle(e.target.value)} />
+            </label>
             <input type="text" placeholder="Descripción" value={description} onChange={(e) => setDescription(e.target.value)} />
             <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-            <input type="text" placeholder="Duración (min)" value={duration} onChange={(e) => setDuration(e.target.value)} />
+            <input type="number" placeholder="Duración (min)" min="1" value={duration} onChange={(e) => setDuration(e.target.value)} />
             <button type="submit">Agregar Evento</button>
         </form>
     );
