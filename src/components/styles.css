@@ -56,3 +56,46 @@ button{
 button:hover{
     background: #0056b3;
 }
+
+.event.Proximamente {
+    background-color: #ffeaa7;
+  }
+  
+  .event.En-curso {
+    background-color: #74b9ff;
+    color: white;
+  }
+  
+  .event.Finalizado {
+    background-color: #dfe6e9;
+  }
+  
+  .event.Completado {
+    background-color: #55efc4;
+    color: white;
+  }
+  
+  /* Animaciones */
+  .fade-in {
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .highlight {
+    animation: highlightEffect 1s ease-in-out;
+  }
+  
+  @keyframes highlightEffect {
+    0% { background-color: yellow; }
+    100% { background-color: inherit; }
+  }
+  
+  /* Drag & Drop efecto */
+  .dragging {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
