@@ -72,7 +72,7 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   }
   
-  .event-item.Proximamente {
+  .event-item.proximamente {
     border-left-color: #f39c12;
   }
   
@@ -80,9 +80,10 @@ body {
     border-left-color: #3498db;
   }
   
-  .event-item.Completado {
+  .event-item.completado {
     border-left-color: #2ecc71;
-    opacity: 0.8;
+    opacity: 0.9;
+    background-color: #eaffea;
   }
   
   .complete-button {
