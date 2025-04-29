@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const EventForm = ({ addEvent }) => {
+const EventForm = ({ addEvent, usuarioActual }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
@@ -9,16 +9,24 @@ const EventForm = ({ addEvent }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!title || !description || !date || !duration) {
+      alert("Por favor completá todos los campos.");
+      return;
+    }
+
     const newEvent = {
       id: Date.now(),
       title,
       description,
       date,
       duration: Number(duration),
+      user: usuarioActual, // Asocia el evento al usuario actual
+      completed: false,
     };
 
     addEvent(newEvent);
 
+    // Limpiar los campos del formulario
     setTitle("");
     setDescription("");
     setDate("");
@@ -26,35 +34,31 @@ const EventForm = ({ addEvent }) => {
   };
 
   return (
-    <form className="event-form" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
+      <h2>Agregar Evento</h2>
       <input
         type="text"
-        placeholder="Título del evento"
+        placeholder="Título"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        required
       />
-      <input
-        type="text"
+      <textarea
         placeholder="Descripción"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        required
       />
       <input
         type="datetime-local"
         value={date}
         onChange={(e) => setDate(e.target.value)}
-        required
       />
       <input
         type="number"
         placeholder="Duración (minutos)"
         value={duration}
         onChange={(e) => setDuration(e.target.value)}
-        required
       />
-      <button type="submit">Agregar Evento</button>
+      <button type="submit">Guardar Evento</button>
     </form>
   );
 };

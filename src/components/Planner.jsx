@@ -1,71 +1,50 @@
 import React, { useState, useEffect } from "react";
 import EventForm from "./EventForm";
 import EventList from "./EventList";
-import "./styles.css";
 
-const getEventStatus = (startDate, durationMinutes) => {
-  const now = new Date();
-  const start = new Date(startDate);
-  const end = new Date(start.getTime() + durationMinutes * 60000);
-
-  if (now < start) return "Proximamente";
-  if (now >= start && now <= end) return "En curso";
-  return "Completado";
-};
-
-const Planner = () => {
+const Planner = ({ usuarioActual }) => {
   const [events, setEvents] = useState([]);
 
+  // Cargar eventos desde localStorage
   useEffect(() => {
-    const storedEvents = localStorage.getItem("events");
-    if (storedEvents) {
-      setEvents(JSON.parse(storedEvents));
-    }
+    const storedEvents = JSON.parse(localStorage.getItem("eventos")) || [];
+    setEvents(storedEvents);
   }, []);
 
+  // Guardar eventos en localStorage cada vez que cambian
   useEffect(() => {
-    localStorage.setItem("events", JSON.stringify(events));
+    localStorage.setItem("eventos", JSON.stringify(events));
   }, [events]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setEvents((prevEvents) => {
-        const updatedEvents = prevEvents.map((event) => {
-          const status = getEventStatus(event.date, event.duration);
-          return { ...event, status };
-        });
-        return updatedEvents;
-      });
-    }, 60000);
+  // Filtrar solo los eventos del usuario actual
+  const userEvents = events.filter(event => event.user === usuarioActual);
 
-    return () => clearInterval(interval);
-  }, []);
-
+  // Agregar un nuevo evento
   const addEvent = (newEvent) => {
-    const status = getEventStatus(newEvent.date, newEvent.duration);
-    const eventWithStatus = { ...newEvent, status };
-    setEvents((prevEvents) => [...prevEvents, eventWithStatus]);
+    setEvents(prevEvents => [...prevEvents, newEvent]);
   };
 
-  const deleteEvent = (id) => {
-    setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
-  };
-
-  const markAsCompleted = (id) => {
-    setEvents((prevEvents) =>
-      prevEvents.map((event) =>
-        event.id === id ? { ...event, status: "Completado" } : event
+  // Marcar evento como completado
+  const toggleComplete = (id) => {
+    setEvents(prevEvents =>
+      prevEvents.map(event =>
+        event.id === id ? { ...event, completed: !event.completed } : event
       )
     );
   };
 
+  // Eliminar un evento
+  const deleteEvent = (id) => {
+    setEvents(prevEvents => prevEvents.filter(event => event.id !== id));
+  };
+
   return (
-    <div className="planner">
-      <h1>Planificador de Rutinas</h1>
-      <EventForm addEvent={addEvent} />
+    <div>
+      <h1>Agenda de {usuarioActual}</h1>
+      <EventForm addEvent={addEvent} usuarioActual={usuarioActual} />
       <EventList
-        events={events}
-        markAsCompleted={markAsCompleted}
+        events={userEvents}
+        toggleComplete={toggleComplete}
         deleteEvent={deleteEvent}
       />
     </div>
