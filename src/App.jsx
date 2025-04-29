@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Planner from './components/Planner';
+import Planner from './components/EventList';
 import Auth from './components/Auth';
-import './styles.css';
+import './components/styles.css';
 
 const App = () => {
   const [usuarioActual, setUsuarioActual] = useState(null);
