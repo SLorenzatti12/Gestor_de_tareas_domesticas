@@ -1,54 +1,43 @@
-import React, { useState, useEffect } from "react";
-import EventForm from "./EventForm";
-import EventList from "./EventList";
+import React, { useState } from 'react';
+import EventForm from './EventForm';
+import EventList from './EventList';
+import './styles.css';
 
-const Planner = ({ usuarioActual }) => {
-  const [events, setEvents] = useState([]);
+const mockUsers = [
+  { id: 1, name: 'Juan' },
+  { id: 2, name: 'Sofía' },
+  { id: 3, name: 'Carlos' },
+];
 
-  // Cargar eventos desde localStorage
-  useEffect(() => {
-    const storedEvents = JSON.parse(localStorage.getItem("eventos")) || [];
-    setEvents(storedEvents);
-  }, []);
+const Dashboard = () => {
+  const [tasks, setTasks] = useState([]);
 
-  // Guardar eventos en localStorage cada vez que cambian
-  useEffect(() => {
-    localStorage.setItem("eventos", JSON.stringify(events));
-  }, [events]);
-
-  // Filtrar solo los eventos del usuario actual
-  const userEvents = events.filter(event => event.user === usuarioActual);
-
-  // Agregar un nuevo evento
-  const addEvent = (newEvent) => {
-    setEvents(prevEvents => [...prevEvents, newEvent]);
+  const handleAddTask = (newTask) => {
+    setTasks([...tasks, newTask]);
   };
 
-  // Marcar evento como completado
-  const toggleComplete = (id) => {
-    setEvents(prevEvents =>
-      prevEvents.map(event =>
-        event.id === id ? { ...event, completed: !event.completed } : event
-      )
-    );
+  const handleCompleteTask = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks[index].completed = !updatedTasks[index].completed;
+    setTasks(updatedTasks);
   };
 
-  // Eliminar un evento
-  const deleteEvent = (id) => {
-    setEvents(prevEvents => prevEvents.filter(event => event.id !== id));
+  const handleDeleteTask = (index) => {
+    const updatedTasks = tasks.filter((_, i) => i !== index);
+    setTasks(updatedTasks);
   };
 
   return (
-    <div>
-      <h1>Agenda de {usuarioActual}</h1>
-      <EventForm addEvent={addEvent} usuarioActual={usuarioActual} />
+    <div className="form-container">
+      <h1>Gestor de Tareas</h1>
+      <EventForm onAddTask={handleAddTask} users={mockUsers} />
       <EventList
-        events={userEvents}
-        toggleComplete={toggleComplete}
-        deleteEvent={deleteEvent}
+        tasks={tasks}
+        onCompleteTask={handleCompleteTask}
+        onDeleteTask={handleDeleteTask}
       />
     </div>
   );
 };
 
-export default Planner;
+export default Dashboard;

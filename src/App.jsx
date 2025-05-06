@@ -1,34 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import Planner from './components/EventList';
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Auth from './components/Auth';
-import './components/styles.css';
+import'./components/styles.css';
+import Dashboard from './components/Dashboard';
 
 const App = () => {
-  const [usuarioActual, setUsuarioActual] = useState(null);
 
-  useEffect(() => {
-    const usuario = localStorage.getItem('usuarioActual');
-    if (usuario) {
-      setUsuarioActual(usuario);
-    }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem('usuarioActual');
-    setUsuarioActual(null);
-  };
-
+  const [mockUsers] = useState([
+    { id: 1, name: 'Usuario 1'},
+    { id: 2, name: 'Usuario 2'},
+    { id: 3, name: 'Usuario 3'}
+  ]);
   return (
-    <div className="App">
-      {usuarioActual ? (
-        <>
-          <button onClick={handleLogout} className="logout-btn">Cerrar sesión</button>
-          <Planner usuarioActual={usuarioActual} />
-        </>
-      ) : (
-        <Auth onLogin={setUsuarioActual} />
-      )}
-    </div>
+    <Routes>
+      <Route path="/" element={<Auth />} />
+      <Route path="/event-form" element={<Dashboard />} />
+    </Routes>
   );
 };
 

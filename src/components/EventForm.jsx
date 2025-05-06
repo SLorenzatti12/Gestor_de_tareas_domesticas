@@ -1,65 +1,68 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-const EventForm = ({ addEvent, usuarioActual }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
-  const [duration, setDuration] = useState("");
+const EventForm = ({ onAddTask, users }) => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [createdAt, setCreatedAt] = useState('');
+  const [responsible, setResponsible] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!title || !description || !date || !duration) {
-      alert("Por favor completá todos los campos.");
+    if (!title || !description || !createdAt || !responsible) {
+      alert("Por favor, completa todos los campos.");
       return;
     }
 
-    const newEvent = {
-      id: Date.now(),
+    const newTask = {
       title,
       description,
-      date,
-      duration: Number(duration),
-      user: usuarioActual, // Asocia el evento al usuario actual
+      createdAt,
+      responsible,
       completed: false,
     };
 
-    addEvent(newEvent);
+    onAddTask(newTask);
 
-    // Limpiar los campos del formulario
-    setTitle("");
-    setDescription("");
-    setDate("");
-    setDuration("");
+    // Limpiar formulario
+    setTitle('');
+    setDescription('');
+    setCreatedAt('');
+    setResponsible('');
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Agregar Evento</h2>
-      <input
-        type="text"
-        placeholder="Título"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <textarea
-        placeholder="Descripción"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <input
-        type="datetime-local"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-      />
-      <input
-        type="number"
-        placeholder="Duración (minutos)"
-        value={duration}
-        onChange={(e) => setDuration(e.target.value)}
-      />
-      <button type="submit">Guardar Evento</button>
-    </form>
+    <div className="form-container">
+      <h1>Crear Nueva Tarea</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Título de la tarea"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+
+        <textarea
+          placeholder="Descripción"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <input
+          type="date"
+          value={createdAt}
+          onChange={(e) => setCreatedAt(e.target.value)}
+        />
+
+        <select value={responsible} onChange={(e) => setResponsible(e.target.value)}>
+          <option value="">Seleccionar responsable</option>
+          {users.map(user => (
+            <option key={user.id} value={user.name}>{user.name}</option>
+          ))}
+        </select>
+
+        <button type="submit">Agregar Tarea</button>
+      </form>
+    </div>
   );
 };
 

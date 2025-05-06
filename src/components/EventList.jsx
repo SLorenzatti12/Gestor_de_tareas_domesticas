@@ -1,48 +1,24 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React from 'react';
 
-const EventList = ({ events, markAsCompleted, deleteEvent }) => {
+const EventList = ({ tasks, onToggleComplete, onDelete }) => {
   return (
     <div className="event-list">
-      <h2>Eventos Programados</h2>
-      {events.length === 0 ? (
-        <p>No hay eventos programados.</p>
+      <h2>Tareas</h2>
+      {tasks.length === 0 ? (
+        <p>No hay tareas registradas.</p>
       ) : (
         <ul>
-          {events.map((event) => (
-            <motion.li
-              key={event.id}
-              className={`event-item ${event.status.toLowerCase()}`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-            >
-              <h3>{event.title}</h3>
-              <p>{event.description}</p>
-              <p>
-                <strong>Fecha:</strong> {event.date}
-              </p>
-              <p>
-                <strong>Duración:</strong> {event.duration} min
-              </p>
-              <p>
-                <strong>Estado:</strong> {event.status}
-              </p>
-              <div className="event-buttons">
-                {event.status !== "Completado" && (
-                  <button onClick={() => markAsCompleted(event.id)}>
-                    Marcar como Completado
-                  </button>
-                )}
-                <button
-                  className="delete-btn"
-                  onClick={() => deleteEvent(event.id)}
-                >
-                  Eliminar
-                </button>
-              </div>
-            </motion.li>
+          {tasks.map((task, index) => (
+            <li key={index} className={task.completed ? 'completed' : ''}>
+              <h3>{task.title}</h3>
+              <p>{task.description}</p>
+              <p>Fecha de creación: {task.createdAt}</p>
+              <p>Responsable: {task.responsible}</p>
+              <button onClick={() => onToggleComplete(index)}>
+                {task.completed ? 'Marcar como pendiente' : 'Marcar como completada'}
+              </button>
+              <button onClick={() => onDelete(index)}>Eliminar</button>
+            </li>
           ))}
         </ul>
       )}

@@ -1,63 +1,47 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Auth = ({ onLogin }) => {
-  const [isRegistering, setIsRegistering] = useState(false);
+const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleAuth = (e) => {
-    e.preventDefault();
-    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || {};
-
-    if (isRegistering) {
-      if (usuarios[email]) {
-        setError('El usuario ya existe');
-      } else {
-        usuarios[email] = { password };
-        localStorage.setItem('usuarios', JSON.stringify(usuarios));
-        localStorage.setItem('usuarioActual', email);
-        onLogin(email);
-      }
+  const handleLogin = () => {
+    const storedPassword = localStorage.getItem(`password:${email}`);
+    if (storedPassword === password) {
+      localStorage.setItem('userEmail', email);
+      navigate('/event-form');
     } else {
-      if (!usuarios[email] || usuarios[email].password !== password) {
-        setError('Credenciales incorrectas');
-      } else {
-        localStorage.setItem('usuarioActual', email);
-        onLogin(email);
-      }
+      alert('Credenciales incorrectas.');
+    }
+  };
+
+  const handleRegister = () => {
+    if (email && password) {
+      localStorage.setItem(`password:${email}`, password);
+      alert('Usuario registrado correctamente.');
+    } else {
+      alert('Ingrese email y contraseña para registrarse.');
     }
   };
 
   return (
-    <div className="auth-container">
-      <h2>{isRegistering ? 'Registrarse' : 'Iniciar sesión'}</h2>
-      <form onSubmit={handleAuth}>
-        <input
-          type="email"
-          placeholder="Correo electrónico"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        {error && <p className="error">{error}</p>}
-        <button type="submit">
-          {isRegistering ? 'Registrarse' : 'Ingresar'}
-        </button>
-      </form>
-      <button onClick={() => {
-        setIsRegistering(!isRegistering);
-        setError('');
-      }}>
-        {isRegistering ? '¿Ya tienes cuenta? Inicia sesión' : '¿No tienes cuenta? Regístrate'}
-      </button>
+    <div className="form-container">
+      <h2>Bienvenido</h2>
+      <input 
+        type="email" 
+        value={email} 
+        onChange={(e) => setEmail(e.target.value)} 
+        placeholder="Email" 
+      />
+      <input 
+        type="password" 
+        value={password} 
+        onChange={(e) => setPassword(e.target.value)} 
+        placeholder="Contraseña" 
+      />
+      <button onClick={handleLogin}>Iniciar sesión</button>
+      <button onClick={handleRegister} className="secondary-btn">Registrarse</button>
     </div>
   );
 };
