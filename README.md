@@ -30,3 +30,8 @@ La documentación completa del proyecto se encuentra organizada en la carpeta [`
 - HTML + CSS
 - LocalStorage
 - Herramientas de modelado UML y BPMN (Draw.io)
+## 🌐 Probar la aplicación
+
+Si querés ver cómo funciona el sistema en vivo, podés acceder a la versión desplegada desde el siguiente enlace:
+
+👉 [Probar Gestor de Tareas Domésticas](https://681ab8145fd72200081b1fba--dashboarddomestico.netlify.app/)
