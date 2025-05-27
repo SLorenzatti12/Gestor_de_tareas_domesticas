@@ -13,7 +13,7 @@ const TaskHistory = ({ tasks }) => {
     <div className='history-container'>
       <h2>Historial de Tareas Completadas</h2>
       {tasks.length === 0 ? (
-        <p className='no-tasks'>No hay tareas completadas.</p>
+        <p>No hay tareas completadas.</p>
       ) : (
         <ul className="task-history-list">
           {tasks.map(task => (

@@ -3,11 +3,14 @@ import EventForm from './EventForm';
 import EventList from './EventList';
 import TaskHistory from './History';
 import ViewSwitcher from './ViewSwitcher';
+import Ranking from './Ranking';
 
 const mockUsers = [
   { id: 1, name: "Usuario 1" },
   { id: 2, name: "Usuario 2" },
-  { id: 3, name: "Usuario 3" }
+  { id: 3, name: "Usuario 3" },
+  { id: 4, name: "Usuario 4" },
+  { id: 5, name: "Usuario 5" }
 ];
 
 const Planner = () => {
@@ -50,11 +53,24 @@ const Planner = () => {
   const pendingTasks = tasks.filter(task => !task.completed);
   const completedTasks = tasks.filter(task => task.completed);
 
+  const userScores = mockUsers.map(user => {
+    const score = completedTasks
+      .filter(task => task.responsible === user.name)
+      .reduce((sum, task) => sum + (task.points || 0), 0); // suma puntos
+    return { name: user.name, score };
+  });
+
+
   return (
     <div className="form-container">
       <h1>Gestor de Tareas</h1>
   
       <EventForm onAddTask={handleAddTask} users={mockUsers} view = {view} setView={setView}/>
+      <button onClick={() => setView("ranking")}>Ver Ranking</button>
+      {view === "ranking" && (
+        <Ranking users = {mockUsers} userScores = {userScores} setView={setView} />
+      )}
+
       <div className="filter-buttons">
         <ViewSwitcher view = {view} setView={setView} />
       </div>

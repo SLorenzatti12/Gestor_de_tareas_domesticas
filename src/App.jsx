@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Auth from './components/Auth';
 import'./components/styles.css';
-import ViewSwitcher from './components/ViewSwitcher';
 import Planner from './components/Planner';
 
 const App = () => {
