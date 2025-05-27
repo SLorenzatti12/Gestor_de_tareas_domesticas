@@ -260,6 +260,9 @@ button:hover {
 
 /* Botones de completar o eliminar */
 .event-list button {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 1rem;
   background-color: #444;
   color: white;
   border: none;
