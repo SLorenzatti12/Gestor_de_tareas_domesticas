@@ -278,3 +278,63 @@ button:hover {
   background-color: #888;
   cursor: not-allowed;
 }
+
+.history-container {
+  background-color: #222;
+  color: #eee;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.task-history-list {
+  list-style: none;
+  padding: 0;
+}
+
+.history-task {
+  background-color: #333;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-left: 4px solid #4caf50;
+  border-radius: 5px;
+}
+
+.history-task p {
+  margin: 0.5rem 0;
+}
+
+.no-tasks {
+  font-style: italic;
+  color: #aaa;
+}
+.view-switch {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.view-switch button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #444;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.view-switch button:hover {
+  background-color: #666;
+}
+.filter-buttons {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.filter-buttons button.active {
+  background-color: #444;
+  color: white;
+  font-weight: bold;
+}

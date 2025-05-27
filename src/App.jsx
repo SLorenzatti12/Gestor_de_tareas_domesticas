@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Auth from './components/Auth';
 import'./components/styles.css';
-import Dashboard from './components/Dashboard';
+import ViewSwitcher from './components/ViewSwitcher';
+import Planner from './components/Planner';
 
 const App = () => {
 
@@ -14,7 +15,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Auth />} />
-      <Route path="/event-form" element={<Dashboard />} />
+      <Route path="/event-form" element={< Planner/>} />
     </Routes>
   );
 };

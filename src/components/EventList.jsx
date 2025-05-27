@@ -8,16 +8,16 @@ const EventList = ({ tasks, onToggleComplete, onDelete }) => {
         <p>No hay tareas registradas.</p>
       ) : (
         <ul>
-          {tasks.map((task, index) => (
-            <li key={index} className={task.completed ? 'completed' : ''}>
+          {tasks.map((task) => (
+            <li key={task.id} className={task.completed ? 'completed' : ''}>
               <h3>{task.title}</h3>
               <p>{task.description}</p>
-              <p>Fecha de creación: {task.createdAt}</p>
+              <p>Fecha de creación: {new Date(task.createdAt).toLocaleDateString()}</p>
               <p>Responsable: {task.responsible}</p>
-              <button onClick={() => onToggleComplete(index)}>
+              <button onClick={() => onToggleComplete(task.id)}>
                 {task.completed ? 'Marcar como pendiente' : 'Marcar como completada'}
               </button>
-              <button onClick={() => onDelete(index)}>Eliminar</button>
+              <button onClick={() => onDelete(task.id)}>Eliminar</button>
             </li>
           ))}
         </ul>
