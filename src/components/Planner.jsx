@@ -63,17 +63,19 @@ const Planner = () => {
 
   return (
     <div className="form-container">
-      <h1>Gestor de Tareas</h1>
+      <header className='app-header'>
+        <h1>Gestor de Tareas</h1>
+      </header>
   
       <EventForm onAddTask={handleAddTask} users={mockUsers} view = {view} setView={setView}/>
-      <button onClick={() => setView("ranking")}>Ver Ranking</button>
       {view === "ranking" && (
         <Ranking users = {mockUsers} userScores = {userScores} setView={setView} />
       )}
-
-      <div className="filter-buttons">
-        <ViewSwitcher view = {view} setView={setView} />
-      </div>
+      {view !== "ranking" && (
+        <div className="filter-buttons">
+          <ViewSwitcher view = {view} setView={setView} />
+        </div>
+      )}
   
       {view === "pending" && (
         <EventList

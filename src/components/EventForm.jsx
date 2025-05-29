@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const EventForm = ({ onAddTask, users}) => {
+const EventForm = ({ onAddTask, users, setView, view}) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [responsible, setResponsible] = useState('');
@@ -87,6 +87,9 @@ const EventForm = ({ onAddTask, users}) => {
         </select>
 
         <button type="submit">Agregar Tarea</button>
+        <button onClick={() => setView(view === "ranking" ? "pending" : "ranking")}>
+          {view === "ranking" ? "Volver" : "🏆 Ver Ranking 🏆"}
+        </button>
       </form>
     </div>
   );

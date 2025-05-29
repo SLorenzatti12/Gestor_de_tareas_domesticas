@@ -18,7 +18,7 @@ body, html {
 /* Contenedor visual */
 .form-container {
   background-color: #1f1f1f;
-  padding: 30px;
+  padding: 1rem;
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(0,0,0,0.4);
   width: 100%;
@@ -26,6 +26,9 @@ body, html {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 /* Formulario */
@@ -104,6 +107,8 @@ select:focus {
   list-style: none;
   padding: 0;
   margin-top: 20px;
+  max-height: 60vh;
+  overflow-y: auto;
 }
 
 .task-item {
@@ -349,18 +354,22 @@ button:hover {
   max-width: 600px;
   margin: auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  
 }
 
 .ranking-container h2 {
   text-align: center;
   margin-bottom: 20px;
   font-size: 24px;
+  
 }
 
 .ranking-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  
+  
 }
 
 .ranking-item {
@@ -395,6 +404,7 @@ button:hover {
   color: #4caf50;
 }
 
+
 .back-button {
   margin-top: 20px;
   display: block;
@@ -409,5 +419,20 @@ button:hover {
 }
 
 .back-button:hover {
+  background-color: #666;
+}
+
+.ranking-button {
+  background-color: #444;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ranking-button:hover {
   background-color: #666;
 }

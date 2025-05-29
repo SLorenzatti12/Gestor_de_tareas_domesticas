@@ -5,7 +5,7 @@ const Ranking = ({ users, userScores, setView }) => {
 
   return (
     <div className="ranking-container">
-      <h2>🏆 Ranking de Tareas Completadas 🏆</h2>
+      <h2>🏆 Ranking de Usuarios 🏆</h2>
       <ul className="ranking-list">
         {sortedScores.map((user, index) => (
           <li key={index} className="ranking-item">
@@ -15,9 +15,6 @@ const Ranking = ({ users, userScores, setView }) => {
           </li>
         ))}
       </ul>
-      <button className="back-button" onClick={() => setView("pending")}>
-        ← Volver
-      </button>
     </div>
   );
 };
