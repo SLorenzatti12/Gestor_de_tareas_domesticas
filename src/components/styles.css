@@ -15,20 +15,37 @@ body, html {
   align-items: center;
 }
 
-/* Contenedor visual */
-.form-container {
-  background-color: #1f1f1f;
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
-  width: 100%;
-  max-width: 400px;
+.planner-container {
+  padding: 20px;
+}
+
+.main-content {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1rem;
+  max-width: 1200px; /* Limita el ancho máximo */
+  margin: 0 auto; /* Centra el contenido */
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Contenedor visual */
+.task-view {
+  flex: 1;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.task-list {
+  width: 100%;
+}
+
+/* Estilo para el formulario */
+.form-container {
+  max-width: 400px;
+  flex-shrink: 0;
 }
 
 /* Formulario */
@@ -36,6 +53,10 @@ body, html {
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+
+.filter-buttons {
+  margin-bottom: 15px;
 }
 
 h2 {
@@ -347,13 +368,13 @@ button:hover {
   font-weight: bold;
 }
 .ranking-container {
-  background-color: #1f1f1f;
-  padding: 20px;
-  border-radius: 15px;
-  color: #fff;
-  max-width: 600px;
-  margin: auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 100%;
+  padding: 2rem;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  margin: 2rem auto;
   
 }
 
@@ -361,15 +382,13 @@ button:hover {
   text-align: center;
   margin-bottom: 20px;
   font-size: 24px;
-  
 }
+
 
 .ranking-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  
-  
 }
 
 .ranking-item {
@@ -404,7 +423,6 @@ button:hover {
   color: #4caf50;
 }
 
-
 .back-button {
   margin-top: 20px;
   display: block;
@@ -435,4 +453,64 @@ button:hover {
 
 .ranking-button:hover {
   background-color: #666;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-container,
+  .task-view {
+    max-width: 100%;
+  }
+}
+
+.main-layout{
+  padding: 1rem;
+}
+
+.main-columns {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  position: sticky;
+}
+
+.left-column {
+  /* flex: 1; */
+  width: 40%;
+}
+
+.right-column {
+  width: 60%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+.app-header h1{
+  text-align: center;
+  margin: 2rem 0 1rem;
+  position:relative;
+}
+
+.task-list-scroll {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.task-list-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.task-list-scroll::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+.task-list-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
 }

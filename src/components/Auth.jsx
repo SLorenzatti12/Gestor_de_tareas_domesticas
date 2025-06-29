@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isRegistering, setIsRegistering] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = () => {
     const storedPassword = localStorage.getItem(`password:${email}`);
     if (storedPassword === password) {
       localStorage.setItem('userEmail', email);
-      navigate('/event-form');
+      navigate('/event-form'); // o la ruta principal de tu app
     } else {
       alert('Credenciales incorrectas.');
     }
@@ -20,6 +23,7 @@ const Auth = () => {
     if (email && password) {
       localStorage.setItem(`password:${email}`, password);
       alert('Usuario registrado correctamente.');
+      setIsRegistering(false);
     } else {
       alert('Ingrese email y contraseña para registrarse.');
     }
@@ -27,21 +31,25 @@ const Auth = () => {
 
   return (
     <div className="form-container">
-      <h2>Bienvenido</h2>
-      <input 
-        type="email" 
-        value={email} 
-        onChange={(e) => setEmail(e.target.value)} 
-        placeholder="Email" 
-      />
-      <input 
-        type="password" 
-        value={password} 
-        onChange={(e) => setPassword(e.target.value)} 
-        placeholder="Contraseña" 
-      />
-      <button onClick={handleLogin}>Iniciar sesión</button>
-      <button onClick={handleRegister} className="secondary-btn">Registrarse</button>
+      {isRegistering ? (
+        <RegisterForm
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          onRegister={handleRegister}
+          switchToLogin={() => setIsRegistering(false)}
+        />
+      ) : (
+        <LoginForm
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          onLogin={handleLogin}
+          switchToRegister={() => setIsRegistering(true)}
+        />
+      )}
     </div>
   );
 };

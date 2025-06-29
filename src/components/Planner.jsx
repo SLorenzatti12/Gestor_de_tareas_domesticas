@@ -62,34 +62,47 @@ const Planner = () => {
 
 
   return (
-    <div className="form-container">
+    <div className="main-layout">
       <header className='app-header'>
         <h1>Gestor de Tareas</h1>
       </header>
-  
-      <EventForm onAddTask={handleAddTask} users={mockUsers} view = {view} setView={setView}/>
-      {view === "ranking" && (
-        <Ranking users = {mockUsers} userScores = {userScores} setView={setView} />
-      )}
-      {view !== "ranking" && (
-        <div className="filter-buttons">
-          <ViewSwitcher view = {view} setView={setView} />
+
+      <div className="main-columns">
+        {/* Columna izquierda: Formulario */}
+        <div className="left-column">
+          <EventForm onAddTask={handleAddTask} users={mockUsers} view={view} setView={setView} />
         </div>
-      )}
-  
-      {view === "pending" && (
-        <EventList
-          tasks={pendingTasks}
-          onToggleComplete={handleToggleComplete}
-          onDelete={handleDelete}
-        />
-      )}
-  
-      {view === "completed" && (
-        <TaskHistory tasks={completedTasks} />
-      )}
+
+        {/* Columna derecha: Listas o Ranking */}
+        <div className="right-column">
+          {view === "ranking" && (
+            <Ranking users={mockUsers} userScores={userScores} setView={setView} />
+          )}
+
+          {view !== "ranking" && (
+            <>
+              <div className="filter-buttons">
+                <ViewSwitcher view={view} setView={setView} />
+              </div>
+              <div className="task-list-scroll">
+                {view === "pending" && (
+                  <EventList
+                    tasks={pendingTasks}
+                    onToggleComplete={handleToggleComplete}
+                    onDelete={handleDelete}
+                  />
+                )}
+
+                {view === "completed" && (
+                  <TaskHistory tasks={completedTasks} />
+                )}
+              </div>
+            </>
+          )}
+        </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default Planner;
