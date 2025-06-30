@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "title": "Lavar los platos",
+    "description": "Después del almuerzo",
+    "responsible": "Usuario 1",
+    "category": "cotidiana",
+    "points": 5,
+    "completed": false,
+    "createdAt": "2024-06-28T12:00:00.000Z"
+  },
+  {
+    "id": "2",
+    "title": "Sacar la basura",
+    "description": "Antes de las 20hs",
+    "responsible": "Usuario 2",
+    "category": "urgente",
+    "points": 15,
+    "completed": true,
+    "createdAt": "2024-06-27T19:30:00.000Z"
+  },
+  {
+    "id": "3",
+    "title": "Barrer el patio",
+    "description": "Antes del anochecer",
+    "responsible": "Usuario 3",
+    "category": "esporadica",
+    "points": 10,
+    "completed": true,
+    "createdAt": "2024-06-26T10:00:00.000Z"
+  },
+  {
+    "id": "4",
+    "title": "Limpiar el baño",
+    "description": "Usar desinfectante",
+    "responsible": "Usuario 1",
+    "category": "urgente",
+    "points": 15,
+    "completed": true,
+    "createdAt": "2024-06-25T09:00:00.000Z"
+  }
+]

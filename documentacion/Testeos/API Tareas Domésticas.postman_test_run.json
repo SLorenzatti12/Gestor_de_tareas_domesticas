@@ -1,0 +1,132 @@
+{
+	"id": "dbb9e040-3e84-48cf-8c6e-a6100e739295",
+	"name": "API Tareas Domésticas",
+	"timestamp": "2025-06-30T14:59:33.484Z",
+	"collection_id": "46312892-bd4d90c7-267b-4d7c-9b40-1947baea2aa2",
+	"folder_id": 0,
+	"environment_id": "46312892-e43a3951-1ec5-4cfa-bb9f-f348967503ad",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-06-30T14:59:33.040Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "247cc220-89ca-4b84-a6eb-fd9b5f387106",
+			"name": "Obtener Tareas",
+			"url": "http://localhost:3000/tasks",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				10
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "8229c294-af65-4846-a780-98b83a09de61",
+			"name": "Crear Tarea",
+			"url": "http://localhost:3000/tasks",
+			"time": 15,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				15
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "395e8eb0-55c9-4455-9740-8475b4a71c5b",
+			"name": "Actualizar como completada",
+			"url": "http://localhost:3000/tasks/3",
+			"time": 4,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a52500f9-78f2-4e88-99ea-9393f0b7b1b7",
+			"name": "Borrar tarea",
+			"url": "http://localhost:3000/tasks/b745",
+			"time": 5,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				5
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "7a96c8c6-6bbb-48ba-b137-8dec5b239dee",
+			"name": "Obtener Usuarios",
+			"url": "http://localhost:3000/users",
+			"time": 3,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				3
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 37,
+	"collection": {
+		"requests": [
+			{
+				"id": "247cc220-89ca-4b84-a6eb-fd9b5f387106",
+				"method": "GET"
+			},
+			{
+				"id": "8229c294-af65-4846-a780-98b83a09de61",
+				"method": "POST"
+			},
+			{
+				"id": "395e8eb0-55c9-4455-9740-8475b4a71c5b",
+				"method": "PUT"
+			},
+			{
+				"id": "a52500f9-78f2-4e88-99ea-9393f0b7b1b7",
+				"method": "DELETE"
+			},
+			{
+				"id": "7a96c8c6-6bbb-48ba-b137-8dec5b239dee",
+				"method": "GET"
+			}
+		]
+	}
+}

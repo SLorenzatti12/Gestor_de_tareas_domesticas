@@ -1,0 +1,81 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Lavar los platos",
+      "description": "Después del almuerzo",
+      "responsible": "Usuario 1",
+      "category": "cotidiana",
+      "points": 5,
+      "completed": false,
+      "createdAt": "2024-06-28T12:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "title": "Doblar ropa",
+      "description": "Después de que esté seca",
+      "responsible": "Usuario 4",
+      "category": "cotidiana",
+      "points": 5,
+      "completed": true,
+      "createdAt": "2025-06-30T12:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "title": "Limpiar el baño",
+      "description": "Usar desinfectante",
+      "responsible": "Usuario 1",
+      "category": "urgente",
+      "points": 15,
+      "completed": true,
+      "createdAt": "2024-06-25T09:00:00.000Z"
+    },
+    {
+      "id": "7f6c",
+      "title": "Doblar ropa",
+      "description": "Después de que esté seca",
+      "responsible": "Usuario 4",
+      "category": "cotidiana",
+      "points": 5,
+      "completed": false,
+      "createdAt": "2025-06-30T12:00:00.000Z"
+    },
+    {
+      "id": "89f7",
+      "title": "Doblar ropa",
+      "description": "Después de que esté seca",
+      "responsible": "Usuario 4",
+      "category": "cotidiana",
+      "points": 5,
+      "completed": false,
+      "createdAt": "2025-06-30T12:00:00.000Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Usuario 1",
+      "score": 20
+    },
+    {
+      "id": "2",
+      "name": "Usuario 2",
+      "score": 15
+    },
+    {
+      "id": "3",
+      "name": "Usuario 3",
+      "score": 10
+    },
+    {
+      "id": "4",
+      "name": "Usuario 4",
+      "score": 0
+    },
+    {
+      "id": "5",
+      "name": "Usuario 5",
+      "score": 0
+    }
+  ]
+}
